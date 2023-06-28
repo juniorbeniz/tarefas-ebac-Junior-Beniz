@@ -12,7 +12,7 @@ public class PrimeiraClasse {
 			if (teste.equalsIgnoreCase("Junior")) {
 				System.out.println("Serei um Especialista Back-End Java");
 			} else {
-				System.out.println("Hello World!!!");
+				System.out.println("Hello World!!");
 			}
 			
 		}
