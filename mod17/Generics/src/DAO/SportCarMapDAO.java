@@ -1,11 +1,11 @@
 package DAO;
 
-import Domain.Car;
 import Domain.SportCar;
 import Generics.IGenericDAO;
 
-
-import java.util.*;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SportCarMapDAO implements IGenericDAO <SportCar> {
 
@@ -26,11 +26,9 @@ public class SportCarMapDAO implements IGenericDAO <SportCar> {
     }
 
     @Override
-    public SportCar excluir(Long ID) {
+    public void excluir(Long ID) {
         SportCar carExcluir = sportCarMap.get(ID);
         sportCarMap.remove(carExcluir.getID(), carExcluir);
-
-        return null;
     }
 
     @Override

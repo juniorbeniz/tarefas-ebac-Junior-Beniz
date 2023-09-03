@@ -27,10 +27,9 @@ public class CarMapDAO implements IGenericDAO<Car> {
     }
 
     @Override
-    public Car excluir(Long ID) {
+    public void excluir(Long ID) {
         Car carExcluir = carMap.get(ID);
         carMap.remove(carExcluir.getID(), carExcluir);
-        return carExcluir;
     }
 
     @Override
@@ -45,11 +44,13 @@ public class CarMapDAO implements IGenericDAO<Car> {
 
     @Override
     public Car consultar(Long ID) {
+
         return this.carMap.get(ID);
     }
 
     @Override
     public Collection<Car> exibirTodos() {
+
         return this.carMap.values();
     }
 

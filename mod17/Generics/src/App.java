@@ -1,3 +1,5 @@
+import DAO.CarMapDAO;
+import DAO.SportCarMapDAO;
 import Domain.Car;
 import Domain.SportCar;
 import Generics.IGenericDAO;
@@ -7,9 +9,13 @@ import javax.swing.*;
 
 public class App {
 
-    private static IGenericDAO CarMapDAO;
-    private static IGenericDAO SportCarMapDAO;
+    private static IGenericDAO iCarMapDAO;
+    private static IGenericDAO iSportCarMapDAO;
+
     public static void main (String [] args){
+
+        iSportCarMapDAO = new SportCarMapDAO();
+        iCarMapDAO = new CarMapDAO();
 
 
          String opcao = JOptionPane.showInputDialog(null,
@@ -75,6 +81,9 @@ public class App {
                      alterarPasseio(dados);
                  }
              }
+             opcao = JOptionPane.showInputDialog(null,
+                     "Digite 1 para cadastro, 2 para consultar, 3 para exclusão, 4 para alteração ou 5 para sair",
+                     "Green dinner", JOptionPane.INFORMATION_MESSAGE);
          }
 
     }
@@ -82,7 +91,7 @@ public class App {
     private static void alterarPasseio(String dados) {
         String[] dadosCar = dados.split(",");
         SportCar car1 = new SportCar(dadosCar[0], dadosCar[1], dadosCar[2], dadosCar[3], dadosCar[4]);
-        CarMapDAO.alterar(car1);
+        iCarMapDAO.alterar(car1);
         JOptionPane.showMessageDialog(null, "Carro de passeio alterado com sucesso ", "Sucesso!",JOptionPane.INFORMATION_MESSAGE);
 
     }
@@ -90,7 +99,7 @@ public class App {
     private static void alterarEsportivo(String dados) {
         String[] dadosCar = dados.split(",");
         SportCar sportCar1 = new SportCar(dadosCar[0], dadosCar[1], dadosCar[2], dadosCar[3], dadosCar[4]);
-        SportCarMapDAO.alterar(sportCar1);
+        iSportCarMapDAO.alterar(sportCar1);
         JOptionPane.showMessageDialog(null, "Carro esportivo alterado com sucesso ", "Sucesso!",JOptionPane.INFORMATION_MESSAGE);
     }
 
@@ -101,13 +110,13 @@ public class App {
     }
 
     private static void excluirPasseio(String iDexcluir) {
-        Car carExcluir = (Car) CarMapDAO.excluir(Long.parseLong(iDexcluir));
+        iCarMapDAO.excluir(Long.parseLong(iDexcluir));
         JOptionPane.showMessageDialog(null, "Cliente Excluido", "Sucesso",JOptionPane.INFORMATION_MESSAGE);
 
     }
 
     private static void excluirEsportivo(String iDexcluir) {
-        SportCar carExcluir = (SportCar) SportCarMapDAO.excluir(Long.parseLong(iDexcluir));
+        iSportCarMapDAO.excluir(Long.parseLong(iDexcluir));
         JOptionPane.showMessageDialog(null, "Cliente Excluido", "Sucesso",JOptionPane.INFORMATION_MESSAGE);
 
     }
@@ -119,7 +128,7 @@ public class App {
     }
 
     private static void consultaPasseio(String iDconsulta) {
-        Car passeioConsulta = (Car) CarMapDAO.consultar(Long.parseLong(iDconsulta));
+        Car passeioConsulta = (Car) iCarMapDAO.consultar(Long.parseLong(iDconsulta));
         if (passeioConsulta != null) {
             JOptionPane.showMessageDialog(null, "Carro encontrado com sucesso: " + passeioConsulta.toString(), "Sucesso",JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -128,7 +137,7 @@ public class App {
     }
 
     private static void consultaEsportivo(String iDconsulta) {
-        SportCar sportConsulta = (SportCar) SportCarMapDAO.consultar(Long.parseLong(iDconsulta));
+        SportCar sportConsulta = (SportCar) iSportCarMapDAO.consultar(Long.parseLong(iDconsulta));
         if (sportConsulta != null) {
             JOptionPane.showMessageDialog(null, "Carro encontrado com sucesso: " + sportConsulta.toString(), "Sucesso",JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -148,7 +157,7 @@ public class App {
         Integer hP = Integer.parseInt(dadosCar[3]);
         if(hP > 149){
             SportCar sportCar1 = new SportCar(dadosCar[0], dadosCar[1], dadosCar[2], dadosCar[3], dadosCar[4]);
-            Boolean isCadastrado = SportCarMapDAO.cadastro(sportCar1);
+            Boolean isCadastrado = iSportCarMapDAO.cadastro(sportCar1);
 
             if(isCadastrado){
                 JOptionPane.showMessageDialog(null, "Carro esportivo cadastrado com sucesso ", "Sucesso!",JOptionPane.INFORMATION_MESSAGE);
@@ -157,7 +166,7 @@ public class App {
             }
         } else {
             Car car1 = new Car(dadosCar[0], dadosCar[1], dadosCar[2], dadosCar[3], dadosCar[4]);
-            Boolean isCadastrado = CarMapDAO.cadastro(car1);
+            Boolean isCadastrado = iCarMapDAO.cadastro(car1);
             if(isCadastrado){
                 JOptionPane.showMessageDialog(null, "Carro cadastrado com sucesso ", "Sucesso!",JOptionPane.INFORMATION_MESSAGE);
             } else {

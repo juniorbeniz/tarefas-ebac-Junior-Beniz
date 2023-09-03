@@ -75,12 +75,6 @@ public class Car implements Persistence {
 
     @Override
     public String toString() {
-        return "Car{" +
-                "ID=" + ID +
-                ", montadora='" + montadora + '\'' +
-                ", modelo='" + modelo + '\'' +
-                ", wHP=" + wHP +
-                ", ano=" + ano +
-                '}';
+        return "Car{" + "ID = " + ID + ", Montadora =" + montadora + ", Modelo = " + modelo +", wHP = " + wHP + ", Ano = " + ano ;
     }
 }
